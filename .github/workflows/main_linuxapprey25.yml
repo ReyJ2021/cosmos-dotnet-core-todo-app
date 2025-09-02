@@ -18,6 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install libssl
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libssl1.1 || sudo apt-get install -y libssl3
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
@@ -52,4 +57,5 @@ jobs:
           app-name: 'linuxapprey25'
           slot-name: 'Production'
           package: .
+
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7A03B97B6446472E92554E6D3A1E97B3 }}
